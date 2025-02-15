@@ -5,7 +5,7 @@
   "description": "deployer",
   "license": "MIT",
   "scripts": {
-    "start:dev": "sh rundev.sh && tsc-watch --onSuccess 'node -r tsconfig-paths/register dist/main.js'",
+    "start:dev": "sh createdb.sh && tsc-watch --onSuccess 'node -r tsconfig-paths/register dist/main.js'",
     "start": "node -r tsconfig-paths/register dist/main.js",
     "build": "tsc"
   },
