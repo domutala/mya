@@ -37,6 +37,7 @@ systemctl daemon-reload
 
 # Enable and start the service
 echo "Enabling and starting the service..."
+systemctl daemon-reload
 systemctl enable $SERVICE_NAME
 systemctl start $SERVICE_NAME
 
