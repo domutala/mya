@@ -23,7 +23,6 @@ After=network.target
 ExecStart=$NODEJS_EXEC -r tsconfig-paths/register dist/main.js
 WorkingDirectory=$NODEJS_APP_PATH
 Restart=always
-Environment=NODE_ENV=production # Add other environment variables if needed
 
 [Install]
 WantedBy=multi-user.target
