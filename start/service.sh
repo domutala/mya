@@ -27,7 +27,7 @@ Restart=always
 WantedBy=multi-user.target"
 
 echo "$content" > $SERVICE_PATH
-# chmod 644 $SERVICE_PATH
+chmod 644 $SERVICE_PATH
 
 # Reload systemd services
 echo "Reloading systemd services..."
