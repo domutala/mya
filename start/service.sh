@@ -14,9 +14,7 @@ $NPM_EXEC build
 # Create the service file
 echo "Creating the systemd service..."
 
-systemctl stop $SERVICE_NAME
-
-cat <<EOL > $SERVICE_PATH
+content ="
 [Unit]
 Description=Node.js Service for mya application
 After=network.target
@@ -29,7 +27,10 @@ Environment=NODE_ENV=production # Add other environment variables if needed
 
 [Install]
 WantedBy=multi-user.target
-EOL
+"
+
+echo "$content" > $SERVICE_PATH
+chmod 644 $SERVICE_PATH
 
 # Reload systemd services
 echo "Reloading systemd services..."
