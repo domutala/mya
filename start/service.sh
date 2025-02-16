@@ -13,6 +13,8 @@ $NPM_EXEC install
 # Create the service file
 echo "Creating the systemd service..."
 
+sudo systemctl stop $SERVICE_NAME
+
 cat <<EOL > $SERVICE_PATH
 [Unit]
 Description=Node.js Service for mya application
