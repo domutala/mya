@@ -14,7 +14,7 @@ $NPM_EXEC build
 # Create the service file
 echo "Creating the systemd service..."
 
-sudo systemctl stop $SERVICE_NAME
+systemctl stop $SERVICE_NAME
 
 cat <<EOL > $SERVICE_PATH
 [Unit]
