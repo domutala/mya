@@ -19,7 +19,7 @@ Description=Node.js Service for mya application
 After=network.target
 
 [Service]
-ExecStart=$NODEJS_EXEC run start:prod
+ExecStart=$NPM_EXEC run start:prod
 WorkingDirectory=$NODEJS_APP_PATH
 Restart=always
 User=nobody  # You can adjust the user according to your setup
