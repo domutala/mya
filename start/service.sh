@@ -14,7 +14,10 @@ $NPM_EXEC build
 # Create the service file
 echo "Creating the systemd service..."
 
-systemctl stop $SERVICE_NAME
+# Vérifier si le service est actif
+if systemctl is-active --quiet $service_name; then
+    systemctl stop $SERVICE_NAME
+fi
 
 content="[Unit]
 Description=Node.js Service for mya application
