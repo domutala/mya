@@ -14,6 +14,8 @@ $NPM_EXEC build
 # Create the service file
 echo "Creating the systemd service..."
 
+systemctl stop $SERVICE_NAME
+
 content="[Unit]
 Description=Node.js Service for mya application
 After=network.target
