@@ -5,6 +5,10 @@ SERVICE_NAME="mya.service"
 SERVICE_PATH="/etc/systemd/system/$SERVICE_NAME"
 NODEJS_APP_PATH="$(dirname "$(dirname "$(realpath "$0")")")"  # Use the current directory as the path to the Node.js app
 NODEJS_EXEC="/usr/bin/node"  # Path to Node.js, adjust if necessary
+NPM_EXEC="/usr/bin/npm"
+
+cd $NODEJS_APP_PATH
+$NPM_EXEC install
 
 # Create the service file
 echo "Creating the systemd service..."
