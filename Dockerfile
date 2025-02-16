@@ -12,6 +12,7 @@ COPY . .
 RUN sh ./docker-entrypoint.sh
 
 # Expose the application port
-EXPOSE ${PORT}
+EXPOSE 7700
 
-CMD ["node", "dist/main.js"]
+# CMD ["node", "dist/main.js"]
+CMD ["echo", "you"]

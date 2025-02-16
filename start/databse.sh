@@ -1,28 +1,17 @@
 #!/bin/bash
 
-PORT=7700
-DATABASE_HOST=localhost
-DATABASE_NAME=mya
-DATABASE_USER=root
-DATABASE_PASSWORD=$(tr -dc 'A-Za-z0-9' < /dev/urandom | head -c 16)
+RACINE="$(dirname "$(dirname "$(realpath "$0")")")"  
 
-echo "export PORT=\"$PORT\"" >> ~/.bashrc
-echo "export DATABASE_HOST=\"$DATABASE_HOST\"" >> ~/.bashrc
-echo "export DATABASE_NAME=\"$DATABASE_NAME\"" >> ~/.bashrc
-echo "export DATABASE_USER=\"$DATABASE_USER\"" >> ~/.bashrc
-echo "export DATABASE_PASSWORD=\"$DATABASE_PASSWORD\"" >> ~/.bashrc
-
-export PORT="$PORT"
-export DATABASE_HOST="$DATABASE_HOST"
-export DATABASE_NAME="$DATABASE_NAME"
-export DATABASE_USER="$DATABASE_USER"
-export DATABASE_PASSWORD="$DATABASE_PASSWORD"
+# Charger les variables depuis le fichier .env
+if [ -f $RACINE/.env ]; then
+  export $(grep -v '^#' "$RACINE/.env" | xargs)
+fi
 
 # Arrêter le script en cas d'erreur
 set -e
 
 # echo "🚀 Mise à jour du système..."
-# sudo apt update && sudo apt upgrade -y
+sudo apt update
 
 echo "📥 Installation des dépendances..."
 sudo apt install -y wget gnupg2 lsb-release curl
@@ -65,7 +54,3 @@ if ! sudo -u postgres psql -tAc "SELECT 1 FROM pg_database WHERE datname='$DATAB
   sudo -u postgres createdb -O $DATABASE_USER $DATABASE_NAME
   sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE $DATABASE_NAME TO $DATABASE_USER;"
 fi
-
-cd /app
-yarn install
-yarn build

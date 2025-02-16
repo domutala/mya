@@ -1,13 +1,13 @@
 {
-  "name": "deployer",
+  "name": "mya",
   "private": true,
-  "version": "0.0.0",
-  "description": "deployer",
+  "version": "1.0.0",
+  "description": "Mya is a CI/CD solution designed for individual developers and small teams",
   "license": "MIT",
   "scripts": {
     "start:dev": "sh createdb.sh && tsc-watch --onSuccess 'node -r tsconfig-paths/register dist/main.js'",
-    "start": "node -r tsconfig-paths/register dist/main.js",
-    "build": "echo 'you'"
+    "start:prod": "tsc && node -r tsconfig-paths/register dist/main.js",
+    "build": "tsc"
   },
   "dependencies": {
     "@koa/router": "^13.1.0",
