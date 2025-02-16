@@ -15,7 +15,7 @@ $NPM_EXEC build
 echo "Creating the systemd service..."
 
 # Vérifier si le service est actif
-if systemctl is-active --quiet $service_name; then
+if systemctl is-active --quiet $SERVICE_NAME; then
     systemctl stop $SERVICE_NAME
 fi
 
