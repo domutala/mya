@@ -14,8 +14,7 @@ $NPM_EXEC build
 # Create the service file
 echo "Creating the systemd service..."
 
-content="
-[Unit]
+content="[Unit]
 Description=Node.js Service for mya application
 After=network.target
 
@@ -25,11 +24,10 @@ WorkingDirectory=$NODEJS_APP_PATH
 Restart=always
 
 [Install]
-WantedBy=multi-user.target
-"
+WantedBy=multi-user.target"
 
 echo "$content" > $SERVICE_PATH
-chmod 644 $SERVICE_PATH
+# chmod 644 $SERVICE_PATH
 
 # Reload systemd services
 echo "Reloading systemd services..."
@@ -37,7 +35,6 @@ systemctl daemon-reload
 
 # Enable and start the service
 echo "Enabling and starting the service..."
-systemctl daemon-reload
 systemctl enable $SERVICE_NAME
 systemctl start $SERVICE_NAME
 
