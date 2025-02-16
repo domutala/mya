@@ -14,3 +14,5 @@ export interface IDeploy {
 }
 
 export type Plugin = (options: { app: Koa; router: Router }) => void;
+
+export interface IConfig {}

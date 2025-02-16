@@ -6,12 +6,16 @@ import Router from "@koa/router";
 import run from "../../functions/run";
 
 import { Plugin } from "../../interfaces";
+import { Config } from "../../database/entitys/Config";
 
 const plugin: Plugin = function (options) {
   async function webhook(ctx: Koa.ParameterizedContext) {
+    const repository = dataSource.getRepository(Config);
+    const config = await repository.createQueryBuilder("config").getOne();
+    const GITHUB_USERNAME = config.data.github.GITHUB_USERNAME;
+    const GITHUB_TOKEN = config.data.github.GITHUB_TOKEN;
+
     const body = ctx.request.body as any;
-    const GITHUB_USERNAME = process.env.GITHUB_USERNAME;
-    const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
     if (body.repository) {
       const ref = body.ref.replace("refs/heads/", "") as string;
@@ -69,7 +73,7 @@ const plugin: Plugin = function (options) {
   }
 
   const router = new Router();
-  router.post("/github-webhook", middleware, webhook);
+  router.post("/webhook", middleware, webhook);
 
   options.router.use(router.routes(), router.allowedMethods());
 };

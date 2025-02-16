@@ -2,11 +2,12 @@ import Koa from "koa";
 import dotenv from "dotenv";
 import bodyParser from "koa-bodyparser";
 import crypto from "crypto";
-import { initDatabase } from "./database";
+import { dataSource, initDatabase } from "./database";
 import router from "./router";
 import plugins from "./plugins";
 import { existsSync, mkdirSync } from "fs";
 import { join } from "path";
+import { Config } from "./database/entitys/Config";
 
 async function bootstrap() {
   if (!existsSync(join(process.cwd(), ".projects"))) {
@@ -15,6 +16,14 @@ async function bootstrap() {
 
   dotenv.config();
   await initDatabase();
+
+  // create config if not exists
+  const repository = dataSource.getRepository(Config);
+  let config = await repository.createQueryBuilder("config").getOne();
+  if (!config) {
+    config = new Config();
+    await config.save();
+  }
 
   const app = new Koa();
 

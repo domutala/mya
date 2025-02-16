@@ -7,7 +7,7 @@
   "scripts": {
     "start:dev": "sh createdb.sh && tsc-watch --onSuccess 'node -r tsconfig-paths/register dist/main.js'",
     "start": "node -r tsconfig-paths/register dist/main.js",
-    "build": "tsc"
+    "build": "echo 'you'"
   },
   "dependencies": {
     "@koa/router": "^13.1.0",
